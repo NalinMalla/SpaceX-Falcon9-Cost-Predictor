@@ -8,6 +8,10 @@ import plotly.express as px
 
 # Read the airline data into pandas dataframe
 spacex_df = pd.read_csv("spacex_launch_dash.csv")
+#In the given csv file has "CCAFS SLC-40" as well as "CCAFS LC-40" which are both the same launch site. So, we need to correct this.
+spacex_df.replace("CCAFS LC-40", "CCAFS SLC-40", inplace=True)
+spacex_df.to_csv('spacex_launch_dash.csv', index=False)
+
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
 launch_sites = spacex_df['Launch Site'].unique()
